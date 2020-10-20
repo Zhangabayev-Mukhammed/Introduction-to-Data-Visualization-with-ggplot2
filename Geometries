@@ -1,0 +1,107 @@
+# Plot price vs. carat, colored by clarity
+plt_price_vs_carat_by_clarity <- ggplot(diamonds, aes(carat, price, color = clarity))
+
+# Set transparency to 0.5
+plt_price_vs_carat_by_clarity + geom_point(alpha = 0.5, shape = 16)
+
+# Plot base
+plt_mpg_vs_fcyl_by_fam <- ggplot(mtcars, aes(fcyl, mpg, color = fam))
+
+# Default points are shown for comparison
+plt_mpg_vs_fcyl_by_fam + geom_point()
+
+# Now jitter and dodge the point positions
+plt_mpg_vs_fcyl_by_fam + geom_point(position = position_jitterdodge(jitter.width = 0.3, dodge.width = 0.3))
+
+
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  # Use a jitter position function with width 0.1
+  geom_point(alpha = 0.5, position = position_jitter(width = 0.1))
+
+
+ggplot(Vocab, aes(education, vocabulary)) +
+  # Set the shape to 1
+  geom_jitter(alpha = 0.2, shape = 1)
+
+
+Drawing histograms
+datacamp_light_blue <- "#51A8C9"
+
+ggplot(mtcars, aes(mpg, ..density..)) +
+  # Set the fill color to datacamp_light_blue
+  geom_histogram(binwidth = 1, fill = datacamp_light_blue)
+
+ggplot(mtcars, aes(mpg, fill = fam)) +
+  # Change the position to identity, with transparency 0.4
+  geom_histogram(binwidth = 1, position = "identity", alpha = 0.4)
+
+
+Position in bar and col plots
+ggplot(mtcars, aes(fcyl, fill = fam)) +
+  # Change the position to "dodge"
+  geom_bar(position = "dodge")
+
+ggplot(mtcars, aes(cyl, fill = fam)) +
+  # Set the transparency to 0.6
+  geom_bar(position = position_dodge(width = 0.2), alpha = 0.6)
+
+
+
+Bar plots: sequential color palette
+1
+# Plot education, filled by vocabulary
+ggplot(Vocab, aes(education, fill = vocabulary)) + geom_bar()
+2
+# Plot education, filled by vocabulary
+ggplot(Vocab, aes(education, fill = vocabulary)) +
+  # Add a bar layer with position "fill"
+ geom_bar(position = "fill")
+3
+# Plot education, filled by vocabulary
+ggplot(Vocab, aes(education, fill = vocabulary)) +
+  # Add a bar layer with position "fill"
+  geom_bar(position = "fill") +
+  # Add a brewer fill scale with default palette
+  scale_fill_brewer()
+
+
+Basic line plots
+# Print the head of economics
+head(economics)
+
+1
+# Using economics, plot unemploy vs. date
+ggplot(economics, aes(x = date, y = unemploy)) +
+  # Make it a line plot
+  geom_line()
+
+2
+# Change the y-axis to the proportion of the population that is unemployed
+ggplot(economics, aes(date, unemploy/pop)) +
+  geom_line()
+
+
+Multiple time series
+1
+# Plot the Rainbow Salmon time series
+ggplot(fish.species, aes(x = Year, y = Rainbow)) +
+  geom_line()
+
+2
+# Plot the Rainbow Salmon time series
+ggplot(fish.species, aes(x = Year, y = Rainbow)) +
+  geom_line()
+
+# Plot the Pink Salmon time series
+ggplot(fish.species, aes(Year, Pink)) +
+  geom_line()
+
+3
+# Plot multiple time-series by grouping by species
+ggplot(fish.tidy, aes(Year, Capture)) +
+  geom_line(aes(group = Species))
+
+4
+# Plot multiple time-series by coloring by species
+ggplot(fish.tidy, aes(x = Year, y = Capture, color = Species)) +
+  geom_line()
