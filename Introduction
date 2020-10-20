@@ -1,0 +1,90 @@
+Explore and explain
+Meant for a specialist audience.
+
+
+# Load the ggplot2 package
+library("ggplot2")
+
+# Explore the mtcars data frame with str()
+str(mtcars)
+
+# Execute the following command
+ggplot(mtcars, aes(cyl, mpg)) +
+  geom_point()
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Change the command below so that cyl is treated as factor
+ggplot(mtcars, aes(cyl, mpg)) +
+  geom_point()
+ggplot(mtcars, aes(factor(cyl), mpg)) +
+  geom_point()
+
+Mapping data columns to aesthetics
+# Edit to add a color aesthetic mapped to disp
+ggplot(mtcars, aes(wt, mpg, color = disp)) +
+  geom_point()
+
+Understanding variables
+- shape only makes sense with categorical data, and disp is continuous.
+
+Adding geometries
+1
+str(diamonds)
+
+2
+# Add geom_point() with +
+ggplot(diamonds, aes(carat, price)) + geom_point()
+
+3
+# Add geom_smooth() with +
+ggplot(diamonds, aes(carat, price)) +
+  geom_point() + geom_smooth()
+
+
+# Map the color aesthetic to clarity
+ggplot(diamonds, aes(carat, price, color = clarity)) +
+  geom_point() +
+  geom_smooth()
+
+# Make the points 40% opaque
+ggplot(diamonds, aes(carat, price, color = clarity)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth()
+
+
+Saving plots as variables
+1
+# Draw a ggplot
+plt_price_vs_carat <- ggplot(
+  # Use the diamonds dataset
+  diamonds,
+  # For the aesthetics, map x to carat and y to price
+  aes(carat, price)
+)
+
+# Add a point layer to plt_price_vs_carat
+plt_price_vs_carat + geom_point()
+
+
+2
+# From previous step
+plt_price_vs_carat <- ggplot(diamonds, aes(carat, price))
+
+# Edit this to make points 20% opaque: plt_price_vs_carat_transparent
+plt_price_vs_carat_transparent <- plt_price_vs_carat + geom_point(alpha = 0.2)
+
+# See the plot
+plt_price_vs_carat_transparent
+
+3
+# From previous step
+plt_price_vs_carat <- ggplot(diamonds, aes(carat, price))
+
+# Edit this to map color to clarity,
+# Assign the updated plot to a new object
+plt_price_vs_carat_by_clarity <- plt_price_vs_carat + geom_point(aes(color = clarity))
+
+# See the plot
+plt_price_vs_carat_by_clarity
