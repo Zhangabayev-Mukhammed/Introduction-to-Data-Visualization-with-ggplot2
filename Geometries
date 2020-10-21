@@ -10,6 +10,10 @@ plt_mpg_vs_fcyl_by_fam <- ggplot(mtcars, aes(fcyl, mpg, color = fam))
 # Default points are shown for comparison
 plt_mpg_vs_fcyl_by_fam + geom_point()
 
+plt_mpg_vs_fcyl_by_fam + geom_point(position = position_jitter(width = 0.3))
+
+plt_mpg_vs_fcyl_by_fam + geom_point(position = position_jitter(jitter.width = 0.3, dodge.width = 0.3))
+
 # Now jitter and dodge the point positions
 plt_mpg_vs_fcyl_by_fam + geom_point(position = position_jitterdodge(jitter.width = 0.3, dodge.width = 0.3))
 
